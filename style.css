@@ -36,3 +36,23 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
+#Leaderboard {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.chore-block {
+  margin-bottom: 15px;
+}
+
+.chore-block h3 {
+  margin: 5px 0;
+  font-size: 1.1em;
+}
+
+.chore-block ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
