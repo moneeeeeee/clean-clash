@@ -37,6 +37,22 @@ ul {
   padding: 0;
 }
 
+.chore-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.chore-row input {
+  width: 65%;
+}
+
+.chore-row button {
+  padding: 8px 10px;
+  font-size: 0.9em;
+}
+
 #Leaderboard {
   text-align: left;
   margin-top: 10px;
@@ -46,9 +62,20 @@ ul {
   margin-bottom: 15px;
 }
 
-.chore-block h3 {
+.chore-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chore-header h3 {
   margin: 5px 0;
   font-size: 1.1em;
+}
+
+.clear-chore-btn {
+  font-size: 0.8em;
+  padding: 4px 6px;
 }
 
 .chore-block ul {
