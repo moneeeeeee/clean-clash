@@ -44,26 +44,39 @@ function saveTime() {
   const time = timerDisplay.textContent;
   const key = `chore_${chore}`;
   let times = JSON.parse(localStorage.getItem(key)) || [];
+
   times.push(time);
-  times.sort(); // sort lexicographically, okay for HH:MM:SS
+  times.sort();           // HH:MM:SS strings sort fine here
   times = times.slice(0, 5); // keep top 5
+
   localStorage.setItem(key, JSON.stringify(times));
-  displayLeaderboard(chore, times);
+  renderAllLeaderboards();
 }
 
-function displayLeaderboard(chore, times) {
-  leaderboard.innerHTML = `<strong>${chore}</strong>`;
-  times.forEach((t) => {
-    const li = document.createElement("li");
-    li.textContent = t;
-    leaderboard.appendChild(li);
-  });
-}
+function renderAllLeaderboards() {
+  leaderboard.innerHTML = ""; 
 
-// Load last chore leaderboard
-choreInput.addEventListener("input", () => {
-  const chore = choreInput.value;
-  const key = `chore_${chore}`;
-  const times = JSON.parse(localStorage.getItem(key)) || [];
-  displayLeaderboard(chore, times);
-});
+  Object.keys(localStorage)
+    .filter((key) => key.startsWith("chore_"))
+    .forEach((key) => {
+      const chore = key.replace("chore_", "");
+      const times = JSON.parse(localStorage.getItem(key)) || [];
+      if (!times.length) return;
+
+      const section = document.createElement("div");
+
+      const title = document.createElement("strong");
+      title.textContent = chore;
+      section.appendChild(title);
+
+      const ul = document.createElement("ul");
+      times.forEach((t, idx) => {
+        const li = document.createElement("li");
+        li.textContent = `${idx + 1}. ${t}`; // numbered attempts
+        ul.appendChild(li);
+      });
+
+      section.appendChild(ul);
+      leaderboard.appendChild(section);
+    });
+}
